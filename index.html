@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>2024년 나만의 신년계획</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=East+Sea+Dokdo&family=Hahmlet:wght@100..900&family=Moirai+One&family=Nanum+Gothic&family=Nanum+Pen+Script&family=Single+Day&display=swap');
+
+    * {
+      font-family: "East Sea Dokdo", serif;
+    }
+
+
+
+
+    .bg {
+      background-image: url("https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/bg-grid.png");
+      background-size: cover;
+      background-position: center;
+      margin: auto;
+      width: 360px;
+    }
+
+    .title {
+      background-color: blue;
+      bordr-radius: 10px;
+      color: white;
+      text-align: center;
+      padding: 4px 14px;
+    }
+
+    .bucket {
+      width: 160px;
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .img1 {
+      background-image: url("https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/bucket-red.png");
+    }
+
+    .img2 {
+      background-image: url("https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/bucket-lightred.png");
+    }
+  </style>
+  <link rel="stylesheet" type="text/css"
+    href="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/sparta-bucket2.css">
+
+</head>
+
+<body class="bg-t5 ceenter">
+  <h1 class="title">2024년 신년 계획</h1>
+  <p>올해안에 3가지 달성하지 못할 경우,</p>
+  <p>키피를 끊겠어요</p>
+  <div class="flex-row wrap">
+    <div class="bucket img1-t5 center">올해는 반드시 뱃살을 빼겠습니다</div>
+    <div class="bucket img2-t5 center">챗GPT 공부하기</div>
+    <div class="bucket img1-t5 center">중국어 공부하기</div>
+    <div class="bucket img2-t5 center">웹사이트 만들기</div>
+    <div class="bucket img1-t5 center">유튜브 사이트 개설하기</div>
+    <div class="bucket img2-t5 center">책 10권이상 읽기</div>
+  </div>
+ <!-- <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script> -->
+
+  <script>
+    // 페이지 로드 시 이전 상태 복원
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const buckets = document.querySelectorAll(".bucket");
+      buckets.forEach((bucket, index) => {
+        // 로컬 스토리지에서 상태 읽기
+        const isDone = localStorage.getItem("bucket" + index) === "done";
+        if (isDone) {
+          bucket.classList.add("done");
+        }
+      });
+    });
+
+    // 버킷 리스트 클릭 이벤트
+    const buckets = document.querySelectorAll(".bucket");
+    buckets.forEach((bucket, index) => {
+      bucket.addEventListener("click", function () {
+        // 클래스 토글
+        bucket.classList.toggle("done");
+
+        // 로컬 스토리지에 상태 저장
+        if (bucket.classList.contains("done")) {
+          localStorage.setItem("bucket" + index, "done");
+        } else {
+          localStorage.setItem("bucket" + index, "");
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
