@@ -1,0 +1,18 @@
+{
+  "name": "html2mp4",
+  "version": "1.0.0",
+  "description": "HTML 모션 그래픽을 MP4로 변환",
+  "main": "html2mp4.js",
+  "scripts": {
+    "postinstall": "playwright install chromium",
+    "example": "node html2mp4.js examples/title.html"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "playwright": "^1.56.1"
+  },
+  "bin": {
+    "html2mp4": "html2mp4.js"
+  }
+}

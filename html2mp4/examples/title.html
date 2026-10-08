@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>타이틀 모션</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0f172a; overflow: hidden;
+    font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans CJK KR", sans-serif; }
+  .wrap { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  h1 { color: #fff; font-size: 120px; margin: 0; opacity: 0;
+       animation: pop 1s ease-out 0.3s forwards; }
+  .bar { height: 12px; width: 0; background: #facc15; border-radius: 6px; margin-top: 24px;
+         animation: grow 1s ease-in-out 1s forwards; }
+  p { color: #cbd5e1; font-size: 56px; margin-top: 32px; opacity: 0;
+      animation: fade 0.8s ease 1.8s forwards; }
+  #count { color: #facc15; font-size: 64px; margin-top: 24px; }
+  @keyframes pop  { from { opacity: 0; transform: scale(.5) } to { opacity: 1; transform: scale(1) } }
+  @keyframes grow { to { width: 900px } }
+  @keyframes fade { from { opacity: 0; transform: translateY(30px) } to { opacity: 1; transform: none } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>스마트폰 활용 교실</h1>
+    <div class="bar"></div>
+    <p>오늘의 주제: 카카오톡 사진 보내기</p>
+    <div id="count">0</div>
+  </div>
+  <script>
+    // JS 애니메이션 예: 0 → 100 숫자 카운트 (requestAnimationFrame)
+    const el = document.getElementById('count');
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / 3000, 1);
+      el.textContent = Math.round(t * 100) + '%';
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
