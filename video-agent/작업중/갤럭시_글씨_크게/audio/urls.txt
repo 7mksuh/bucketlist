@@ -1,0 +1,7 @@
+01.mp3 https://platform.r2.fish.audio/tasks/2026-11-04/57be9aef72504e9fbef70f4b85c70fc7.mp3
+02.mp3 https://platform.r2.fish.audio/tasks/2026-11-04/0822ec0c8eec40ddab8f724f62c79a41.mp3
+03.mp3 https://platform.r2.fish.audio/tasks/2026-11-04/9f5251a8e76f402b97a249e010a3205e.mp3
+04.mp3 https://platform.r2.fish.audio/tasks/2026-11-04/77955de7e3314804be74681bbc348421.mp3
+05.mp3 https://platform.r2.fish.audio/tasks/2026-11-04/1f632b16d0d34b509c58e8e51c840034.mp3
+06.mp3 https://platform.r2.fish.audio/tasks/2026-11-04/ac5ceb801e6145f1b059c0d2190737ae.mp3
+07.mp3 https://platform.r2.fish.audio/tasks/2026-11-04/e43a5262d7ac4701acadd99e97bc49fc.mp3
