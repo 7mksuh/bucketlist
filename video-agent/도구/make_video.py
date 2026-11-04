@@ -60,6 +60,13 @@ def text(d, xy, s, size, color, role="body", anchor="la"):
     d.text(xy, s, font=f, fill=T[color], anchor=anchor)
 
 
+def baseline_for(size, role, cy):
+    """한글 글자 높이의 가운데가 cy에 오도록 하는 기준선 y"""
+    f = _font(T["제목글꼴"] if role == "head" else T["본문글꼴"], size)
+    _, top, _, bottom = f.getbbox("가", anchor="ls")
+    return cy - (top + bottom) / 2
+
+
 def step_mark(d, cx, cy, r, mark):
     d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=T["강조"])
     fg = T["배경"]
@@ -67,7 +74,9 @@ def step_mark(d, cx, cy, r, mark):
         d.line([(cx - r * .45, cy), (cx - r * .1, cy + r * .4), (cx + r * .5, cy - r * .4)],
                fill=fg, width=int(r * .22), joint="curve")
     else:
-        d.text((cx, cy + r * .05), mark, font=_font(T["제목글꼴"], int(r * 1.15)), fill=fg, anchor="mm")
+        f = _font(T["제목글꼴"], int(r * 1.15))
+        x0, y0, x1, y1 = d.textbbox((0, 0), mark, font=f, anchor="ls")   # 실제 글자 모양 기준
+        d.text((cx - (x0 + x1) / 2, cy - (y0 + y1) / 2), mark, font=f, fill=fg, anchor="ls")
 
 
 def base_frame(i, total, title, sc):
@@ -117,12 +126,14 @@ def draw_scene(i, total, title, sc, shots, out_plain, out_mark):
 
     # 오른쪽: 단계 + 큰 글씨 + 설명
     rx = px + pw + 130
-    step_mark(d, rx + 55, 225, 55, mark)
-    y = 172
+    cy = 222                                        # 번호 동그라미와 큰 글씨 첫 줄의 가운데
+    step_mark(d, rx + 55, cy, 55, mark)
+    base = baseline_for(96, "head", cy)
     for line in textwrap.wrap(sc["big"], 11):
-        text(d, (rx + 140, y), line, 96, "글자", "head"); y += 118
+        text(d, (rx + 140, base), line, 96, "글자", "head", "ls"); base += 118
+    y = base - 118 + 30                             # 마지막 줄 아래
     if sc.get("sub"):
-        text(d, (rx + 142, y + 4), sc["sub"], 54, "강조", "body"); y += 76
+        text(d, (rx + 140, y + 54), sc["sub"], 54, "강조", "body", "ls"); y += 80
     im.save(out_plain)
 
     if not sc.get("box"):
@@ -137,7 +148,7 @@ def draw_scene(i, total, title, sc, shots, out_plain, out_mark):
     cx1, cy1 = max(0, x1 - pad), max(0, y1 - pad)
     cx2, cy2 = min(shot.width, x2 + pad), min(shot.height, y2 + pad)
     crop = shot.crop((cx1, cy1, cx2, cy2))
-    top = max(y + 56, 430)
+    top = int(max(y + 56, 430))
     maxw, maxh = W - rx - 80, 860 - top
     s = min(maxw / crop.width, maxh / crop.height)
     crop = crop.resize((int(crop.width * s), int(crop.height * s)), Image.LANCZOS)
